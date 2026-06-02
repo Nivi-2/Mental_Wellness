@@ -1,0 +1,273 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mental Wellness Support System</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f7ff;
+        }
+
+        header{
+            background:#4a6cf7;
+            color:white;
+            padding:20px;
+            text-align:center;
+        }
+
+        nav{
+            background:white;
+            display:flex;
+            justify-content:center;
+            gap:20px;
+            padding:15px;
+            box-shadow:0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav a{
+            text-decoration:none;
+            color:#333;
+            font-weight:bold;
+        }
+
+        .container{
+            width:90%;
+            margin:auto;
+            margin-top:30px;
+        }
+
+        .card-container{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:20px;
+        }
+
+        .card{
+            background:white;
+            padding:20px;
+            border-radius:15px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card h2{
+            margin-bottom:15px;
+            color:#4a6cf7;
+        }
+
+        .mood-buttons button{
+            padding:10px 15px;
+            margin:5px;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            background:#4a6cf7;
+            color:white;
+            transition:0.3s;
+        }
+
+        .mood-buttons button:hover{
+            background:#3451c7;
+        }
+
+        textarea{
+            width:100%;
+            height:120px;
+            padding:10px;
+            border-radius:10px;
+            border:1px solid #ccc;
+            resize:none;
+        }
+
+        .save-btn{
+            margin-top:10px;
+            padding:10px 20px;
+            background:#4a6cf7;
+            color:white;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+        }
+
+        .chat-box{
+            height:200px;
+            overflow-y:auto;
+            border:1px solid #ccc;
+            padding:10px;
+            border-radius:10px;
+            margin-bottom:10px;
+            background:#fafafa;
+        }
+
+        .chat-input{
+            display:flex;
+            gap:10px;
+        }
+
+        .chat-input input{
+            flex:1;
+            padding:10px;
+            border-radius:10px;
+            border:1px solid #ccc;
+        }
+
+        .chat-input button{
+            padding:10px 15px;
+            border:none;
+            border-radius:10px;
+            background:#4a6cf7;
+            color:white;
+            cursor:pointer;
+        }
+
+        .reminder ul{
+            margin-top:10px;
+            padding-left:20px;
+        }
+
+        footer{
+            margin-top:40px;
+            background:#4a6cf7;
+            color:white;
+            text-align:center;
+            padding:15px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AI-Based Mental Wellness Support System</h1>
+        <p>Track Your Mood • Improve Wellness • Stay Positive</p>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Mood Tracker</a>
+        <a href="#">Journal</a>
+        <a href="#">Chatbot</a>
+        <a href="#">Dashboard</a>
+    </nav>
+
+    <div class="container">
+
+        <div class="card-container">
+
+            <!-- Mood Tracker -->
+
+            <div class="card">
+                <h2>Daily Mood Tracker</h2>
+
+                <div class="mood-buttons">
+                    <button onclick="showMood('Happy 😊')">Happy 😊</button>
+                    <button onclick="showMood('Calm 😌')">Calm 😌</button>
+                    <button onclick="showMood('Stressed 😰')">Stressed 😰</button>
+                    <button onclick="showMood('Sad 😔')">Sad 😔</button>
+                </div>
+
+                <h3 id="moodResult" style="margin-top:15px;"></h3>
+            </div>
+
+            <!-- Journal -->
+
+            <div class="card">
+                <h2>Wellness Journal</h2>
+
+                <textarea placeholder="Write your thoughts here..."></textarea>
+
+                <button class="save-btn">Save Journal</button>
+            </div>
+
+            <!-- AI Chatbot -->
+
+            <div class="card">
+                <h2>AI Support Chatbot</h2>
+
+                <div class="chat-box" id="chatBox">
+                    <p><b>Bot:</b> Hello! How are you feeling today?</p>
+                </div>
+
+                <div class="chat-input">
+                    <input type="text" id="userInput" placeholder="Type message...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+
+            <!-- Reminder Section -->
+
+            <div class="card reminder">
+                <h2>Daily Wellness Reminder</h2>
+
+                <ul>
+                    <li>💧 Drink Water</li>
+                    <li>😴 Sleep Properly</li>
+                    <li>🧘 Take Deep Breaths</li>
+                    <li>📚 Take Study Breaks</li>
+                    <li>🚶 Walk for 10 Minutes</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>AI Mental Wellness Support System</p>
+    </footer>
+
+    <script>
+
+        function showMood(mood){
+            document.getElementById("moodResult").innerHTML =
+            "Your Selected Mood: " + mood;
+        }
+
+        function sendMessage(){
+
+            let input = document.getElementById("userInput").value;
+            let chatBox = document.getElementById("chatBox");
+
+            if(input.trim() === ""){
+                return;
+            }
+
+            chatBox.innerHTML += "<p><b>You:</b> " + input + "</p>";
+
+            let reply = "";
+
+            input = input.toLowerCase();
+
+            if(input.includes("stress")){
+                reply = "Take a short break and relax.";
+            }
+            else if(input.includes("sad")){
+                reply = "Stay positive and talk with friends.";
+            }
+            else if(input.includes("tired")){
+                reply = "Drink water and take rest.";
+            }
+            else{
+                reply = "You are doing great. Stay motivated!";
+            }
+
+            chatBox.innerHTML += "<p><b>Bot:</b> " + reply + "</p>";
+
+            document.getElementById("userInput").value = "";
+
+        }
+
+    </script>
+
+</body>
+</html>

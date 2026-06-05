@@ -6,3 +6,4 @@
 2026-06-03 11:26:00 | Tuned mood tracker styling
 2026-06-04 17:38:00 | Adjusted journal entry handling
 2026-06-04 18:25:00 | Optimized the support UI
+2026-06-05 13:08:00 | Cleaned up helper logic
